@@ -27,11 +27,11 @@ function Game.new( nRows, nCollumns, nShuffles )
 			k = k + 1
 		end
 	end
-	self.cells[self.nRows][self.nCollumns] = 0 
+	self.cells[self.nRows][self.nCollumns] = 0
 	nShuffles = nShuffles or 1
 	while nShuffles > 0 do
 		if self:update( Game.MOVES[math.random(#Game.MOVES)] ) then
-			nShuffles = nShuffles - 1 
+			nShuffles = nShuffles - 1
 		end
 	end
 	return self
@@ -61,11 +61,10 @@ end
 
 function Game:isfinished()
 	local k = 1
-	local n = self.nRows * self.nCollumns
 	for i = 1, self.nRows do
 		for j = 1, self.nCollumns do
 			if self.cells[i][j] ~= k then
-				return false	
+				return false
 			end
 			if k == self.nRows * self.nCollumns - 1 then
 				return true
@@ -74,7 +73,7 @@ function Game:isfinished()
 		end
 	end
 	return true
-end 
+end
 
 function Game:show()
 	for i = 1, self.nRows do
@@ -89,8 +88,8 @@ function Game:show()
 		io.write('\n')
 	end
 end
- 
-function Game:move()
+
+function Game.move()
 	local ch = io.read():sub(1,1)
 	if     ch == 'w' or ch == 'W' or ch == 'k' or ch == 'K' then return Game.UP
 	elseif ch == 's' or ch == 'S' or ch == 'j' or ch == 'J' then return Game.DOWN
@@ -98,7 +97,7 @@ function Game:move()
 	elseif ch == 'd' or ch == 'D' or ch == 'l' or ch == 'L' then return Game.RIGHT
 	end
 end
- 
+
 function Game:run( seed )
 	math.randomseed( seed or os.time() )
 	self:show()
